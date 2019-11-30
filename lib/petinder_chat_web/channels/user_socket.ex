@@ -3,6 +3,7 @@ defmodule PetinderChatWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PetinderChatWeb.RoomChannel
+  channel "general:lobby", PetinderChatWeb.GeneralChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
