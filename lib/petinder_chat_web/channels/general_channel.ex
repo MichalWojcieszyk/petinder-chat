@@ -18,7 +18,8 @@ defmodule PetinderChatWeb.GeneralChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (general:lobby).
   def handle_in("shout", payload, socket) do
-    broadcast(socket, "shout", payload)
+    spawn(PetinderChatWeb.Conversations, :create_message, [payload])
+    broadcast!(socket, "shout", payload)
     {:noreply, socket}
   end
 
@@ -27,3 +28,5 @@ defmodule PetinderChatWeb.GeneralChannel do
     true
   end
 end
+
+
