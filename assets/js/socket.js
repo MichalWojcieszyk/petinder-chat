@@ -67,7 +67,7 @@ message.on('keypress', event => {
 });
 
 channel.on('shout', payload => {
-    list.append(`<b>${payload.name || 'Anonymous'}:</b> ${payload.message}<br>`);
+    list.append(`<b>${payload.name || 'Anonymous'}:</b> ${payload.message}</br>`);
     list.prop({scrollTop: list.prop("scrollHeight")});
 });
 
@@ -75,7 +75,7 @@ channel.on('messages_history', messages => {
     let messages_list = messages["messages"];
 
     messages_list.forEach(function (msg) {
-        list.append(`<b>${msg["name"] || 'Anonymous'}:</b> ${msg["message"]}<br>`);
+        list.append(`<b>${msg["name"] || 'Anonymous'}:</b> ${msg["message"]}</br>`);
         list.prop({scrollTop: list.prop("scrollHeight")});
     });
 });
