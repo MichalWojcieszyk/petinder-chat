@@ -55,13 +55,13 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect();
 
 let channel = socket.channel("general:lobby", {});
-let list    = $('#message-list');
+let list = $('#message-list');
 let message = $('#message');
-let name    = $('#name');
+let name = $('#name');
 
 message.on('keypress', event => {
     if (event.keyCode === 13) {
-        channel.push('shout', { name: name.val(), message: message.val() });
+        channel.push('shout', {name: name.val(), message: message.val()});
         message.val('');
     }
 });
@@ -71,8 +71,22 @@ channel.on('shout', payload => {
     list.prop({scrollTop: list.prop("scrollHeight")});
 });
 
+channel.on('messages_history', messages => {
+    let messages_list = messages["messages"];
+
+    messages_list.forEach(function (msg) {
+        list.append(`<b>${msg["name"] || 'Anonymous'}:</b> ${msg["message"]}<br>`);
+        list.prop({scrollTop: list.prop("scrollHeight")});
+    });
+});
+
 channel.join()
-    .receive("ok", resp => { console.log("Joined successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join", resp) });
+    .receive("ok", resp => {
+        console.log("Joined successfully", resp)
+    })
+    .receive("error", resp => {
+        console.log("Unable to join", resp)
+    });
+
 
 export default socket
