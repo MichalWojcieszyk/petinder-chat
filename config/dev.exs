@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :petinder_chat, PetinderChat.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "password",
   database: "petinder_chat_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
